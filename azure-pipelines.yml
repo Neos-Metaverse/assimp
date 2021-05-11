@@ -22,3 +22,14 @@ steps:
   inputs:
     targetType: 'inline'
     script: 'dir'
+- task: VSBuild@1
+  inputs:
+    solution: 'Assimp.sln'
+    vsVersion: '16.0'
+    platform: 'x64'
+    configuration: 'release'
+    msbuildArchitecture: 'x64'
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: 'dir'
