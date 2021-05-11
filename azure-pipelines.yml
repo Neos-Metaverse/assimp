@@ -18,10 +18,6 @@ steps:
   inputs:
     workingDirectory: 
     cmakeArgs: 'CMakeLists.txt -G "Visual Studio 16 2019"'
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: 'dir'
 - task: VSBuild@1
   inputs:
     solution: 'Assimp.sln'
@@ -30,7 +26,15 @@ steps:
     configuration: 'release'
     maximumCpuCount: true
     msbuildArchitecture: 'x64'
-- task: PowerShell@2
+
+- task: CopyFiles@2
   inputs:
-    targetType: 'inline'
-    script: 'dir bin/Release'
+    SourceFolder: 'bin/Release'
+    Contents: 'assimp-vc142-mt.dll'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'windows_x64'
+    publishLocation: 'Container'
