@@ -31,7 +31,7 @@ steps:
   inputs:
     SourceFolder: 'bin/Release'
     Contents: 'assimp-vc142-mt.dll'
-    TargetFolder: '$(build.artifactstagingdirectory)'
+    TargetFolder: '$(build.artifactstagingdirectory)/Assimp64.dll'
 
 - task: PublishBuildArtifacts@1
   inputs:
