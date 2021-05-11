@@ -28,6 +28,7 @@ steps:
     vsVersion: '16.0'
     platform: 'x64'
     configuration: 'release'
+    maximumCpuCount: true
     msbuildArchitecture: 'x64'
 - task: PowerShell@2
   inputs:
