@@ -13,7 +13,7 @@ strategy:
     windows:
       imageName: 'windows-latest'
       cmakeTarget: 'Visual Studio 16 2019'
-      sourceFolder: 'bin/'
+      sourceFolder: 'bin/Release/'
       sourceFile: 'assimp-vc142-mt.dll'
       targetFile: 'Assimp64.dll'
       artifactName : 'windows_x64'
@@ -42,7 +42,6 @@ steps:
     targetType: 'inline'
     script: |
       make
-      tree .
   condition: eq( variables['Agent.OS'], 'Linux' )
 
 - task: CopyFiles@2
