@@ -53,7 +53,7 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'mv $(sourceFile) $(targetFile)'
+    script: 'mv $(build.artifactstagingdirectory)/$(sourceFile) $(build.artifactstagingdirectory)/$(targetFile)'
 
 - task: PublishBuildArtifacts@1
   inputs:
