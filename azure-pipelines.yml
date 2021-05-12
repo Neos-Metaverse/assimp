@@ -6,9 +6,9 @@ strategy:
     linux:
       imageName: 'ubuntu-latest'
       cmakeTarget: 'Unix Makefiles'
-    windows:
-      imageName: 'windows-latest'
-      cmakeTarget: 'Visual Studio 16 2019'
+    #windows:
+    #  imageName: 'windows-latest'
+    #  cmakeTarget: 'Visual Studio 16 2019'
 
 pool:
   vmImage: $(imageName)
@@ -30,12 +30,11 @@ steps:
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   
 - task: Bash@3
-- task: Bash@3
   inputs:
     targetType: 'inline'
     script: |
       make
-      ls
+      tree -d /bin
   condition: eq( variables['Agent.OS'], 'Linux' )
 
 - task: CopyFiles@2
