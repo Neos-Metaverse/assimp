@@ -6,9 +6,17 @@ strategy:
     linux:
       imageName: 'ubuntu-latest'
       cmakeTarget: 'Unix Makefiles'
-    #windows:
-    #  imageName: 'windows-latest'
-    #  cmakeTarget: 'Visual Studio 16 2019'
+      sourceFolder: 'bin/'
+      sourceFile: 'libassimp.so'
+      targetFile: 'Assimp64.so'
+      artifactName : 'linux_x64'
+    windows:
+      imageName: 'windows-latest'
+      cmakeTarget: 'Visual Studio 16 2019'
+      sourceFolder: 'bin/'
+      sourceFile: 'assimp-vc142-mt.dll'
+      targetFile: 'Assimp64.dll'
+      artifactName : 'windows_x64'
 
 pool:
   vmImage: $(imageName)
@@ -39,12 +47,12 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: 'bin/Release'
-    Contents: 'assimp-vc142-mt.dll'
-    TargetFolder: '$(build.artifactstagingdirectory)/Assimp64.dll'
+    SourceFolder: '$(sourceFolder)'
+    Contents: '$(sourceFile)'
+    TargetFolder: '$(build.artifactstagingdirectory)/$(targetFile)'
 
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'windows_x64'
+    ArtifactName: '$(artifactName)'
     publishLocation: 'Container'
